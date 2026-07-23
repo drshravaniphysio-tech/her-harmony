@@ -1,0 +1,120 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "preferences": {
+          "type": "object",
+          "properties": {
+            "favoriteColors": { "type": "array", "items": { "type": "string" } },
+            "naturePreference": { "type": "string", "enum": ["Beach", "Mountains", "Forest", "Temples", "Wellness retreats", "Parks", "Lakes", "Quiet cafés"] },
+            "budgetLevel": { "type": "string", "enum": ["Low", "Middle", "Upper Middle", "High"] }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "MoodLog": {
+      "title": "Mood Log",
+      "description": "Daily mood and emotional tracking",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "mood": { "type": "string" },
+        "emojis": { "type": "array", "items": { "type": "string" } },
+        "journalEntry": { "type": "string" },
+        "stressLevel": { "type": "number", "minimum": 0, "maximum": 10 },
+        "anxietyLevel": { "type": "number", "minimum": 0, "maximum": 10 },
+        "happinessLevel": { "type": "number", "minimum": 0, "maximum": 10 },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "mood", "timestamp"]
+    },
+    "HealthLog": {
+      "title": "Health Log",
+      "description": "Women's health and wellness tracking",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "cycleDay": { "type": "number" },
+        "symptoms": { "type": "array", "items": { "type": "string" } },
+        "waterIntake": { "type": "number", "description": "ml" },
+        "sleepHours": { "type": "number" },
+        "exerciseMinutes": { "type": "number" },
+        "weight": { "type": "number" },
+        "energyLevel": { "type": "number", "minimum": 0, "maximum": 10 },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "timestamp"]
+    },
+    "PlannerTask": {
+      "title": "Planner Task",
+      "description": "Daily self-care and wellness tasks",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "type": { "type": "string", "enum": ["Meditation", "Stretching", "Reading", "Walking", "Gratitude", "Hydration", "Skin Care", "Relaxation"] },
+        "completed": { "type": "boolean" },
+        "date": { "type": "string", "format": "date" }
+      },
+      "required": ["userId", "title", "date"]
+    },
+    "RecoveryPlan": {
+      "title": "Recovery Plan",
+      "description": "AI-generated healing and recovery plans",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "issue": { "type": "string" },
+        "content": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "issue", "content", "createdAt"]
+    },
+    "GratitudeLog": {
+      "title": "Gratitude Log",
+      "description": "Daily gratitude entries",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "items": { "type": "array", "items": { "type": "string" }, "minItems": 3, "maxItems": 3 },
+        "date": { "type": "string", "format": "date" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "items", "date", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Individual user profile"
+    },
+    "/moodLogs/{logId}": {
+      "schema": "MoodLog",
+      "description": "Collection of mood logs"
+    },
+    "/healthLogs/{logId}": {
+      "schema": "HealthLog",
+      "description": "Collection of health logs"
+    },
+    "/plannerTasks/{taskId}": {
+      "schema": "PlannerTask",
+      "description": "Daily planner tasks"
+    },
+    "/recoveryPlans/{planId}": {
+      "schema": "RecoveryPlan",
+      "description": "Healing recovery plans"
+    },
+    "/gratitudeLogs/{logId}": {
+      "schema": "GratitudeLog",
+      "description": "Collection of gratitude logs"
+    }
+  }
+}

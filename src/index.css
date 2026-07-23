@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lavender-50: #f8f5ff;
+  --color-lavender-100: #f3ebff;
+  --color-lavender-200: #e9dbff;
+  --color-lavender-500: #a78bfa;
+  --color-lavender-600: #8b5cf6;
+  --color-lavender-700: #7c3aed;
+
+  --color-sage-50: #f4f7f5;
+  --color-sage-100: #e9efeb;
+  --color-sage-200: #d3dfd7;
+  --color-sage-500: #8fa79b;
+  --color-sage-600: #708a7d;
+
+  --color-blush-50: #fff5f7;
+  --color-blush-100: #ffeef2;
+  --color-blush-200: #ffdce5;
+  --color-blush-500: #fb7185;
+  --color-blush-600: #e11d48;
+
+  --color-harmony-bg: #fffbfd;
+  --color-harmony-surface: #ffffff;
+  
+  --font-display: "Playfair Display", serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-harmony-bg text-slate-800 font-body;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full;
+}
